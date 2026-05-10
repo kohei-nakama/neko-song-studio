@@ -1076,3 +1076,61 @@ textarea {
     border-radius: 24px;
   }
 }
+/* Neko Uranai replacement panel */
+.neko-uranai-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.neko-uranai-panel::after {
+  content: "🐾";
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  color: rgba(231, 126, 89, 0.22);
+  font-size: 3rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.fortune-mini-list {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.25rem 0;
+}
+
+.fortune-mini-list span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 42px;
+  border: 1px solid rgba(119, 74, 45, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 249, 239, 0.78);
+  color: var(--ink);
+  font-weight: 700;
+  padding: 0.55rem 0.85rem;
+}
+
+.fortune-mini-list span::before {
+  content: "✦";
+  color: var(--coral);
+}
+
+.neko-uranai-cta {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+.neko-youtube-cta {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.neko-uranai-note {
+  margin: 0.8rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
