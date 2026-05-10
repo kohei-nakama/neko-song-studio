@@ -49,6 +49,7 @@
           <a href="#works">作品</a>
           <a href="#flow">制作の流れ</a>
           <a href="#social">SNS</a>
+          <a href="neko-uranai.html">ネコ占い</a>
         </nav>
         <a class="nav-cta" href="#music-release">聴きにいく</a>
       </div>
@@ -346,36 +347,27 @@
             </div>
           </div>
 
-          <div class="idea-panel">
+                    <div class="idea-panel neko-uranai-panel">
             <p class="section-kicker">MESSAGE</p>
-            <h2>猫ソングのリクエスト投稿</h2>
+            <h2>ネコ占い｜今日のあなたは何ネコ？</h2>
             <p>
-              こんな曲をつくってほしい、というテーマや猫ちゃんの性格を送ってください。
-              採用したアイデアは、今後の猫ソング制作のヒントにします。
+              リクエスト投稿の代わりに、今日のネコタイプから運勢とおすすめ猫ソングを楽しめる参加型コンテンツを用意しました。
+              ニックネームと生まれ月だけで遊べます。
             </p>
-            <p>
-              オリジナル猫ソング、店舗・イベント向けPRソング、SNS用ショート動画制作などのご相談も今後受付予定です。
-              まずはやわらかく、アイデアやご相談をお寄せください。
+            <div class="fortune-mini-list" aria-label="ネコ占いでわかること">
+              <span>今日のネコタイプ</span>
+              <span>ラッキー行動</span>
+              <span>おすすめ猫ソング</span>
+            </div>
+            <a class="button button-release neko-uranai-cta" href="neko-uranai.html">
+              今日のネコ運を占う
+            </a>
+            <a class="button button-ghost neko-youtube-cta" href="https://www.youtube.com/@nekosong_kouhei" target="_blank" rel="noopener">
+              YouTubeチャンネルで聴く
+            </a>
+            <p class="neko-uranai-note">
+              外部API、ログイン、DBは使いません。入力内容は外部送信されません。
             </p>
-            <form class="request-form" name="song-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="thanks.html">
-              <input type="hidden" name="form-name" value="song-request">
-              <p class="hidden-field">
-                <label>入力しないでください <input name="bot-field"></label>
-              </p>
-              <label class="form-field">
-                お名前
-                <input name="name" type="text" autocomplete="name" placeholder="例: こうへい">
-              </label>
-              <label class="form-field">
-                つくってほしい猫ソング
-                <textarea name="song_request" rows="5" required placeholder="例: 夜だけ甘えんぼになる猫の、眠る前に聴けるやさしい曲をつくってほしい"></textarea>
-              </label>
-              <label class="form-field">
-                連絡先メール
-                <input name="email" type="email" autocomplete="email" placeholder="任意">
-              </label>
-              <button class="request-submit" type="submit">投稿する</button>
-            </form>
           </div>
         </div>
       </section>
