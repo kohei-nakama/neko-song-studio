@@ -274,6 +274,11 @@ textarea {
   background: rgba(215, 70, 38, 0.84);
 }
 
+.social-pill.fortune {
+  color: var(--ink);
+  background: rgba(255, 208, 138, 0.94);
+}
+
 .social-pill.x {
   background: rgba(36, 21, 15, 0.84);
 }
@@ -330,6 +335,42 @@ textarea {
 .intro-grid p {
   margin: 0;
   font-weight: 800;
+}
+
+.fortune-entry-section {
+  padding: 44px 0;
+  background:
+    linear-gradient(135deg, rgba(255, 208, 138, 0.42), rgba(223, 241, 231, 0.58)),
+    var(--paper);
+}
+
+.fortune-entry-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  padding: 28px;
+  border: 1px solid rgba(168, 74, 29, 0.2);
+  border-radius: 28px;
+  background: rgba(255, 253, 248, 0.84);
+  box-shadow: 0 18px 48px rgba(66, 44, 42, 0.1);
+}
+
+.fortune-entry-card h2 {
+  margin: 0;
+  font-size: 1.85rem;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+.fortune-entry-card p:not(.section-kicker) {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.fortune-entry-card .button {
+  min-width: 260px;
+  align-self: center;
 }
 
 .release-section {
@@ -652,6 +693,27 @@ textarea {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
+.mood-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -12px 0 22px;
+}
+
+.mood-tags span,
+.work-moods span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border: 1px solid rgba(168, 74, 29, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 250, 242, 0.82);
+  color: var(--teal-dark);
+  padding: 5px 10px;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
 .work-card {
   position: relative;
   min-height: 270px;
@@ -696,6 +758,19 @@ textarea {
 .streaming-work .work-tag {
   color: var(--paper-strong);
   background: var(--sage);
+}
+
+.work-moods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.work-moods span {
+  min-height: 28px;
+  background: rgba(255, 250, 242, 0.72);
+  font-size: 0.72rem;
 }
 
 .timeline {
@@ -957,6 +1032,7 @@ textarea {
 
   .section-head,
   .intro-grid,
+  .fortune-entry-card,
   .release-card,
   .social-grid {
     grid-template-columns: 1fr;
@@ -1028,6 +1104,7 @@ textarea {
   .hero-social,
   .hero-social .social-pill,
   .request-submit,
+  .fortune-entry-card .button,
   .release-actions .button,
   .streaming-note .button,
   .service-links a {
@@ -1053,6 +1130,19 @@ textarea {
   .release-card {
     padding: 24px;
     border-radius: 24px;
+  }
+
+  .fortune-entry-section {
+    padding: 34px 0;
+  }
+
+  .fortune-entry-card {
+    padding: 22px;
+    border-radius: 22px;
+  }
+
+  .fortune-entry-card h2 {
+    font-size: 1.55rem;
   }
 
   .release-card h2,

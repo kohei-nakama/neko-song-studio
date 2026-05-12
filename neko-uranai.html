@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ネコ占い｜今日のあなたは何ネコ？</title>
+    <title>今日の1曲ネコ占い｜今日のあなたは何ネコ？</title>
     <meta
       name="description"
-      content="ニックネームと生まれ月から、今日のネコタイプ・運勢・ラッキー要素・おすすめ猫ソングを占います。"
+      content="ニックネームと生まれ月から、今日のネコタイプ・運勢・ラッキー要素・今日のおすすめ猫ソングを占います。"
     />
     <link rel="stylesheet" href="assets/neko-uranai.css" />
   </head>
@@ -23,12 +23,13 @@
           猫ソングスタジオ
         </a>
         <p class="eyebrow">Neko Fortune</p>
-        <h1 id="app-title" aria-label="ネコ占い｜今日のあなたは何ネコ？">
+        <h1 id="app-title" aria-label="今日の1曲ネコ占い｜今日のあなたは何ネコ？">
+          <span>今日の1曲</span>
           <span>ネコ占い</span>
           <span>今日のあなたは</span>
           <span>何ネコ？</span>
         </h1>
-        <p class="hero-copy">今日の運勢を、猫がこっそり教えてくれる。</p>
+        <p class="hero-copy">今日の運勢と、あなたに合う猫ソングを猫がこっそり教えてくれる。</p>
       </section>
 
       <section class="card form-card" aria-labelledby="form-title">
@@ -89,6 +90,11 @@
               <option value="眠り猫">眠り猫</option>
               <option value="忍者猫">忍者猫</option>
               <option value="王様猫">王様猫</option>
+              <option value="甘えんぼ猫">甘えんぼ猫</option>
+              <option value="科学者猫">科学者猫</option>
+              <option value="旅する猫">旅する猫</option>
+              <option value="祭り猫">祭り猫</option>
+              <option value="応援猫">応援猫</option>
             </select>
           </label>
 
@@ -116,7 +122,7 @@
           <p id="cat-message" class="cat-message"></p>
         </div>
 
-        <div class="score-grid" aria-label="運勢スコア">
+        <div class="score-grid" aria-label="今日の運勢">
           <div class="score-item">
             <span>総合運</span>
             <strong id="score-total">★★★★★</strong>
@@ -135,15 +141,7 @@
           </div>
         </div>
 
-        <dl class="lucky-list">
-          <div>
-            <dt>ラッキーカラー</dt>
-            <dd id="lucky-color"></dd>
-          </div>
-          <div>
-            <dt>ラッキーフード</dt>
-            <dd id="lucky-food"></dd>
-          </div>
+        <dl class="today-message-list">
           <div>
             <dt>ラッキー行動</dt>
             <dd id="lucky-action"></dd>
@@ -154,39 +152,84 @@
           </div>
         </dl>
 
-        <div class="song-panel" aria-labelledby="song-title">
+        <dl class="lucky-list" aria-label="今日のラッキー要素">
+          <div>
+            <dt>ラッキーカラー</dt>
+            <dd id="lucky-color"></dd>
+          </div>
+          <div>
+            <dt>ラッキーフード</dt>
+            <dd id="lucky-food"></dd>
+          </div>
+        </dl>
+
+        <div id="song-panel" class="song-panel" aria-labelledby="song-heading">
           <p class="section-kicker">Recommended Cat Song</p>
-          <h3 id="song-title">おすすめ猫ソング</h3>
+          <h3 id="song-heading">今日のあなたに合う猫ソングはこちら</h3>
           <p id="song-name"></p>
-          <div class="song-actions">
+          <p id="song-theme" class="song-theme"></p>
+          <p id="song-description" class="song-description"></p>
+          <div id="song-available-actions" class="song-actions">
             <a
-              id="youtube-channel-link"
+              id="youtube-song-link"
               class="button button-secondary"
               href="https://www.youtube.com/@nekosong_kouhei"
               target="_blank"
               rel="noopener"
             >
-              YouTubeチャンネルで聴く
+              YouTubeで聴く
             </a>
+          </div>
+          <div id="streaming-links" class="streaming-links" aria-label="音楽配信リンク"></div>
+        </div>
+
+        <div id="request-panel" class="request-panel is-hidden" aria-labelledby="request-title">
+          <p class="section-kicker">Request Theme</p>
+          <h3 id="request-title">リクエスト募集</h3>
+          <p id="request-message"></p>
+          <p id="request-text-preview" class="request-preview"></p>
+          <div class="request-actions">
             <a
-              id="studio-song-link"
-              class="button button-soft"
-              href="https://kohei-nakama.github.io/neko-song-studio/"
+              id="request-youtube-link"
+              class="button button-secondary"
+              href="https://www.youtube.com/@nekosong_kouhei"
               target="_blank"
               rel="noopener"
             >
-              猫ソングスタジオHPを見る
+              YouTubeチャンネルでコメントする
             </a>
+            <a
+              id="request-x-link"
+              class="button button-primary"
+              href="https://twitter.com/intent/tweet"
+              target="_blank"
+              rel="noopener"
+            >
+              Xでリクエストする
+            </a>
+            <button id="copy-request-button" class="button button-soft" type="button">
+              リクエスト文をコピーする
+            </button>
           </div>
+          <p id="copy-feedback" class="copy-feedback" role="status"></p>
         </div>
 
         <div class="result-actions">
-          <button id="retry-button" class="button button-secondary" type="button">
-            もう一度占う
-          </button>
           <button id="share-button" class="button button-primary" type="button">
             Xで結果をシェア
           </button>
+          <button id="retry-button" class="button button-secondary" type="button">
+            もう一度占う
+          </button>
+          <a
+            id="x-profile-link"
+            class="button button-soft"
+            href="https://x.com/nakama_kohei"
+            target="_blank"
+            rel="noopener"
+          >
+            猫ソングスタジオのXを見る
+          </a>
         </div>
       </section>
 

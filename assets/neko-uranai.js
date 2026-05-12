@@ -1,6 +1,8 @@
 const STUDIO_URL = "https://kohei-nakama.github.io/neko-song-studio/";
 const FORTUNE_URL = `${STUDIO_URL}neko-uranai.html`;
 const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@nekosong_kouhei";
+const X_PROFILE_URL = "https://x.com/nakama_kohei";
+const X_INTENT_URL = "https://twitter.com/intent/tweet";
 const STORAGE_KEY = "nekoUranaiProfile";
 
 const catTypes = [
@@ -64,6 +66,31 @@ const catTypes = [
     emoji: "👑",
     message: "自分のペースを大切にしたい日。堂々と選ぶ姿に、周りも安心してついてきます。",
   },
+  {
+    name: "甘えんぼ猫",
+    emoji: "🫶",
+    message: "素直な気持ちが伝わりやすい日。小さな甘えは、関係をやわらかくします。",
+  },
+  {
+    name: "科学者猫",
+    emoji: "🔭",
+    message: "試してみるほど発見がある日。気になったことは、ひとつだけ深掘りしてみて。",
+  },
+  {
+    name: "旅する猫",
+    emoji: "🧳",
+    message: "いつもと違う道にヒントがある日。小さな寄り道が気分を入れ替えてくれます。",
+  },
+  {
+    name: "祭り猫",
+    emoji: "🏮",
+    message: "にぎやかな空気が味方の日。楽しい予定や会話に、運の入口があります。",
+  },
+  {
+    name: "応援猫",
+    emoji: "📣",
+    message: "誰かを励ます声が、自分にも返ってくる日。明るい一言を先に届けましょう。",
+  },
 ];
 
 const luckyColors = [
@@ -126,56 +153,156 @@ const dailyWords = [
   "あなたの好きは、ちゃんと今日の道しるべです。",
 ];
 
-const songs = [
+const nekoNinjaStreamingLinks = [
   {
-    title: "ひなたぼっこのララバイ",
-    note: "ゆっくり休みたい日にぴったりの猫ソング。",
+    label: "Apple Music",
+    url: "https://music.apple.com/jp/album/%E3%83%8D%E3%82%B3%E5%BF%8D%E8%80%85-single/1891265005",
   },
   {
-    title: "月あかりのニャイトパレード",
-    note: "少し背中を押してほしい夜に。",
+    label: "Spotify",
+    url: "https://open.spotify.com/track/2QS5tsBOAJFI41axMPDWZD?si=Y-8i1S11R7CDhsNTdiLSRw",
   },
   {
-    title: "ミルク色のメロディ",
-    note: "やさしい気分を取り戻したいときに。",
+    label: "YouTube Music",
+    url: "https://music.youtube.com/channel/UCDWZI7p2WOO-w00rtP6CKkQ?si=VKP1KS6DE42R7_QW",
   },
   {
-    title: "しっぽで刻むスウィング",
-    note: "軽やかに動き出したい日に。",
-  },
-  {
-    title: "路地裏キャットウォーク",
-    note: "自分らしく歩きたい朝に。",
-  },
-  {
-    title: "鈴の音ポップコーン",
-    note: "小さな幸運を集めたい日に。",
-  },
-  {
-    title: "ふわふわ毛布のコード",
-    note: "気持ちをほぐしたい午後に。",
-  },
-  {
-    title: "星降るキャットカフェ",
-    note: "誰かと一緒に聴きたい一曲。",
-  },
-  {
-    title: "黒猫ステップ",
-    note: "直感を信じたい日に。",
-  },
-  {
-    title: "王様の昼寝",
-    note: "自分のペースを守りたいときに。",
-  },
-  {
-    title: "三毛猫ハーモニー",
-    note: "にぎやかな気持ちを整える曲。",
-  },
-  {
-    title: "忍び足のリズム",
-    note: "集中したい作業前に。",
+    label: "Amazon Music",
+    url: "https://music.amazon.co.jp/albums/B0GW8LS2RV?ref=dm_sh_L1YtPNEgkKqeNAVwYoi6ZciY6",
   },
 ];
+
+const cuteSong = {
+  title: "ネコバナナ",
+  theme: "かわいい系の猫",
+  description: "言葉の響きだけでも楽しい、かわいい全振りの猫ソングです。気分を少し軽くしたい日にどうぞ。",
+  youtubeUrl: "https://www.youtube.com/@nekosong_kouhei/search?query=%E3%83%8D%E3%82%B3%E3%83%90%E3%83%8A%E3%83%8A",
+  streamingUrl: "",
+  streamingLinks: [],
+  status: "available",
+  requestMessage: "",
+};
+
+const healingSong = {
+  title: "夜に聴きたい癒し系の猫ソング",
+  theme: "休息と癒し",
+  description: "眠る前や、少し疲れた日に似合う猫ソングです。今日の余白をやさしく取り戻してくれます。",
+  youtubeUrl: "https://www.youtube.com/@nekosong_kouhei/search?query=%E7%99%92%E3%81%97",
+  streamingUrl: "",
+  streamingLinks: [],
+  status: "available",
+  requestMessage: "",
+};
+
+const songCatalogByCatType = {
+  忍者猫: {
+    title: "ネコ忍者",
+    theme: "静かな集中とチャンス",
+    description: "静かにチャンスを狙うあなたにぴったりの、少しミステリアスでかっこいい猫ソングです。",
+    youtubeUrl: YOUTUBE_CHANNEL_URL,
+    streamingUrl: nekoNinjaStreamingLinks[0].url,
+    streamingLinks: nekoNinjaStreamingLinks,
+    status: "available",
+    requestMessage: "",
+  },
+  眠り猫: healingSong,
+  甘えんぼ猫: {
+    title: "夜だけ甘えんぼになる猫",
+    theme: "夜の素直さ",
+    description: "夜になると少し素直になる猫の、やさしくて甘いショートソング。人間関係運をあたためたい日にぴったりです。",
+    youtubeUrl: "https://youtu.be/XkligCLwXvM",
+    streamingUrl: "",
+    streamingLinks: [],
+    status: "available",
+    requestMessage: "",
+  },
+  科学者猫: {
+    title: "科学者と猫",
+    theme: "学びと発見",
+    description: "AIやロケット工学の学びを、猫の歌で楽しく届けるシリーズ。好奇心が動く日におすすめです。",
+    youtubeUrl: "https://youtu.be/eM5e73EmU8s",
+    streamingUrl: "",
+    streamingLinks: [],
+    status: "available",
+    requestMessage: "",
+  },
+  子猫: {
+    title: "子どもの日ねこの歌",
+    theme: "未来への応援",
+    description: "未来の子どもたちを猫がそっと応援する、季節の物語。新しい一歩を踏み出す日に似合います。",
+    youtubeUrl: "https://www.youtube.com/@nekosong_kouhei/search?query=%E5%AD%90%E3%81%A9%E3%82%82%E3%81%AE%E6%97%A5",
+    streamingUrl: "",
+    streamingLinks: [],
+    status: "available",
+    requestMessage: "",
+  },
+  応援猫: {
+    title: "子どもの日ねこの歌",
+    theme: "未来への応援",
+    description: "誰かを励ましたい気分の日に。未来へ向かう背中を、猫がそっと押してくれる一曲です。",
+    youtubeUrl: "https://www.youtube.com/@nekosong_kouhei/search?query=%E5%AD%90%E3%81%A9%E3%82%82%E3%81%AE%E6%97%A5",
+    streamingUrl: "",
+    streamingLinks: [],
+    status: "available",
+    requestMessage: "",
+  },
+  白猫: cuteSong,
+  三毛猫: cuteSong,
+  茶トラ: cuteSong,
+  サバトラ: healingSong,
+  キジトラ: healingSong,
+  長毛猫: healingSong,
+  まねき猫: {
+    title: "まねき猫の福ふくソング",
+    theme: "幸運とご縁",
+    description: "このテーマの猫ソングはまだ制作中です。ご縁を呼び込む明るい曲になりそうです。",
+    youtubeUrl: YOUTUBE_CHANNEL_URL,
+    streamingUrl: "",
+    streamingLinks: [],
+    status: "missing",
+    requestMessage: "まねき猫をテーマにした猫ソングを聴いてみたいです！",
+  },
+  王様猫: {
+    title: "王様猫のごきげん行進曲",
+    theme: "堂々としたマイペース",
+    description: "このテーマの猫ソングはまだ制作中です。ゆったり堂々と歩く王様猫の曲、きっと似合います。",
+    youtubeUrl: YOUTUBE_CHANNEL_URL,
+    streamingUrl: "",
+    streamingLinks: [],
+    status: "missing",
+    requestMessage: "王様猫をテーマにした猫ソングを聴いてみたいです！",
+  },
+  黒猫: {
+    title: "黒猫ミステリーナイト",
+    theme: "直感と夜の不思議",
+    description: "このテーマの猫ソングはまだ制作中です。夜道をすっと歩く黒猫の世界、コメントで育ててください。",
+    youtubeUrl: YOUTUBE_CHANNEL_URL,
+    streamingUrl: "",
+    streamingLinks: [],
+    status: "missing",
+    requestMessage: "黒猫をテーマにした猫ソングを聴いてみたいです！",
+  },
+  旅する猫: {
+    title: "旅する猫のロードソング",
+    theme: "寄り道と小さな冒険",
+    description: "このテーマの猫ソングはまだ制作中です。旅先で出会う景色と猫の物語、いつか聴いてみたいテーマです。",
+    youtubeUrl: YOUTUBE_CHANNEL_URL,
+    streamingUrl: "",
+    streamingLinks: [],
+    status: "missing",
+    requestMessage: "旅する猫をテーマにした猫ソングを聴いてみたいです！",
+  },
+  祭り猫: {
+    title: "祭り猫のおどりうた",
+    theme: "にぎやかさと祝福",
+    description: "このテーマの猫ソングはまだ制作中です。鈴や太鼓が似合う、楽しい猫ソングになりそうです。",
+    youtubeUrl: YOUTUBE_CHANNEL_URL,
+    streamingUrl: "",
+    streamingLinks: [],
+    status: "missing",
+    requestMessage: "祭り猫をテーマにした猫ソングを聴いてみたいです！",
+  },
+};
 
 const form = document.querySelector("#fortune-form");
 const nicknameInput = document.querySelector("#nickname");
@@ -184,6 +311,7 @@ const favoriteCatInput = document.querySelector("#favorite-cat");
 const resultSection = document.querySelector("#result");
 const retryButton = document.querySelector("#retry-button");
 const shareButton = document.querySelector("#share-button");
+const copyRequestButton = document.querySelector("#copy-request-button");
 const formMessage = document.querySelector("#form-message");
 
 let currentResult = null;
@@ -273,6 +401,14 @@ function getValidatedProfile() {
   };
 }
 
+function getCatByName(catName) {
+  return catTypes.find((cat) => cat.name === catName);
+}
+
+function getSongForCat(catName) {
+  return songCatalogByCatType[catName] || cuteSong;
+}
+
 function createResult(profile) {
   const normalizedName = profile.nickname.trim().toLocaleLowerCase("ja-JP");
   const seed = [
@@ -281,32 +417,91 @@ function createResult(profile) {
     profile.birthMonth,
     profile.favoriteCat || "おまかせ",
   ].join("|");
-
-  const cat = pickFrom(catTypes, seed, "cat-type");
-  const total = scoreFrom(seed, "total");
-  const work = scoreFrom(seed, "work");
-  const money = scoreFrom(seed, "money");
-  const relationship = scoreFrom(seed, "relationship");
-  const song = pickFrom(songs, seed, "song");
+  const favoriteCat = getCatByName(profile.favoriteCat);
+  const shouldUseFavorite = favoriteCat && numberFromSeed(seed, "favorite-cat-bias") % 4 === 0;
+  const cat = shouldUseFavorite ? favoriteCat : pickFrom(catTypes, seed, "cat-type");
 
   return {
     nickname: profile.nickname.trim(),
     cat,
     scores: {
-      total,
-      work,
-      money,
-      relationship,
+      total: scoreFrom(seed, "total"),
+      work: scoreFrom(seed, "work"),
+      money: scoreFrom(seed, "money"),
+      relationship: scoreFrom(seed, "relationship"),
     },
     luckyColor: pickFrom(luckyColors, seed, "color"),
     luckyFood: pickFrom(luckyFoods, seed, "food"),
     luckyAction: pickFrom(luckyActions, seed, "action"),
     dailyWord: pickFrom(dailyWords, seed, "word"),
-    song,
+    song: getSongForCat(cat.name),
   };
 }
 
+function renderStreamingLinks(song) {
+  const links = document.querySelector("#streaming-links");
+  links.textContent = "";
+
+  if (!song.streamingLinks.length) {
+    links.classList.add("is-hidden");
+    return;
+  }
+
+  song.streamingLinks.forEach((link) => {
+    const anchor = document.createElement("a");
+    anchor.href = link.url;
+    anchor.target = "_blank";
+    anchor.rel = "noopener";
+    anchor.textContent = `${link.label}で聴く`;
+    links.append(anchor);
+  });
+
+  links.classList.remove("is-hidden");
+}
+
+function buildXIntent(text) {
+  const encodedText = encodeURIComponent(text);
+  const encodedUrl = encodeURIComponent(FORTUNE_URL);
+  return `${X_INTENT_URL}?text=${encodedText}&url=${encodedUrl}`;
+}
+
+function createRequestText(result) {
+  const requestMessage = result.song.requestMessage || `${result.cat.name}をテーマにした猫ソングを聴いてみたいです！`;
+  return [
+    `今日のネコ占いで「${result.cat.name}」でした🐾`,
+    requestMessage,
+    "#ネコ占い #猫ソングスタジオ",
+  ].join("\n");
+}
+
+function renderRequestPanel(result) {
+  const requestPanel = document.querySelector("#request-panel");
+  const requestMessage = document.querySelector("#request-message");
+  const requestTextPreview = document.querySelector("#request-text-preview");
+  const requestXLink = document.querySelector("#request-x-link");
+  const requestYoutubeLink = document.querySelector("#request-youtube-link");
+  const copyFeedback = document.querySelector("#copy-feedback");
+
+  if (result.song.status !== "missing") {
+    requestPanel.classList.add("is-hidden");
+    return;
+  }
+
+  const requestText = createRequestText(result);
+  requestMessage.textContent = `「${result.cat.name}の歌が聴きたい！」と思ったら、ぜひコメントで教えてください。あなたの一言が、次の猫ソングのテーマになるかもしれません。`;
+  requestTextPreview.textContent = requestText;
+  requestXLink.href = buildXIntent(requestText);
+  requestYoutubeLink.href = result.song.youtubeUrl || YOUTUBE_CHANNEL_URL;
+  copyFeedback.textContent = "";
+  requestPanel.classList.remove("is-hidden");
+}
+
 function renderResult(result) {
+  const isMissingSong = result.song.status === "missing";
+  const songPanel = document.querySelector("#song-panel");
+  const availableActions = document.querySelector("#song-available-actions");
+  const youtubeSongLink = document.querySelector("#youtube-song-link");
+
   document.querySelector("#result-emoji").textContent = result.cat.emoji;
   document.querySelector("#cat-type").textContent = result.cat.name;
   document.querySelector("#cat-message").textContent = result.cat.message;
@@ -318,29 +513,57 @@ function renderResult(result) {
   document.querySelector("#lucky-food").textContent = result.luckyFood;
   document.querySelector("#lucky-action").textContent = result.luckyAction;
   document.querySelector("#daily-word").textContent = result.dailyWord;
-  document.querySelector("#song-name").textContent = `${result.song.title}：${result.song.note}`;
+  document.querySelector("#song-heading").textContent = isMissingSong
+    ? "このネコタイプの曲は、まだありません"
+    : "今日のあなたに合う猫ソングはこちら";
+  document.querySelector("#song-name").textContent = `「${result.song.title}」`;
+  document.querySelector("#song-theme").textContent = result.song.theme;
+  document.querySelector("#song-description").textContent = result.song.description;
 
-  document.querySelector("#youtube-channel-link").href = YOUTUBE_CHANNEL_URL;
-  document.querySelector("#studio-song-link").href = STUDIO_URL;
+  songPanel.classList.toggle("song-panel-missing", isMissingSong);
+  availableActions.classList.toggle("is-hidden", isMissingSong);
+  youtubeSongLink.href = result.song.youtubeUrl || YOUTUBE_CHANNEL_URL;
+
+  renderStreamingLinks(result.song);
+  renderRequestPanel(result);
 
   resultSection.classList.remove("is-hidden");
   resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function createShareText(result) {
+  const songLine = result.song.status === "available"
+    ? `おすすめ猫ソング：「${result.song.title}」`
+    : `「${result.cat.name}」の猫ソング、聴いてみたい`;
+
   return [
     `今日の私は「${result.cat.name}」でした🐾`,
     `総合運：${stars(result.scores.total)}`,
     `ラッキー行動：${result.luckyAction}`,
-    "猫ソングはYouTubeチャンネルへ",
+    songLine,
     "#ネコ占い #猫ソングスタジオ",
   ].join("\n");
 }
 
 function openXShare(result) {
-  const text = encodeURIComponent(createShareText(result));
-  const url = encodeURIComponent(FORTUNE_URL);
-  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank", "noopener");
+  window.open(buildXIntent(createShareText(result)), "_blank", "noopener");
+}
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+  document.body.append(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
 }
 
 form.addEventListener("submit", (event) => {
@@ -366,4 +589,17 @@ shareButton.addEventListener("click", () => {
   }
 });
 
+copyRequestButton.addEventListener("click", async () => {
+  if (!currentResult) return;
+
+  const copyFeedback = document.querySelector("#copy-feedback");
+  try {
+    await copyText(createRequestText(currentResult));
+    copyFeedback.textContent = "リクエスト文をコピーしました。";
+  } catch {
+    copyFeedback.textContent = "コピーできませんでした。文面を選択してコピーしてください。";
+  }
+});
+
+document.querySelector("#x-profile-link").href = X_PROFILE_URL;
 loadSavedProfile();
