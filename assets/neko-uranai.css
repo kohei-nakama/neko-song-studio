@@ -11,6 +11,8 @@
   --secondary-dark: #24554e;
   --accent: #f4b94f;
   --mint: #dbf0e7;
+  --lavender: #efe7ff;
+  --sky: #e5f2ff;
   --shadow: 0 18px 48px rgba(72, 42, 22, 0.14);
 }
 
@@ -124,7 +126,7 @@ h3 {
 
 .hero-copy,
 .home-copy {
-  width: min(100%, 34rem);
+  width: min(100%, 36rem);
   margin-bottom: 0;
   color: var(--muted);
   font-size: 1rem;
@@ -161,6 +163,59 @@ h3 {
 .fortune-form {
   display: grid;
   gap: 16px;
+}
+
+.form-step {
+  border: 1px solid rgba(234, 215, 196, 0.86);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 243, 0.96), rgba(255, 253, 248, 0.94)),
+    #fffaf3;
+  padding: 14px;
+}
+
+.form-step:nth-of-type(2) {
+  background:
+    linear-gradient(180deg, rgba(239, 247, 255, 0.9), rgba(255, 253, 248, 0.94)),
+    var(--sky);
+}
+
+.form-step:nth-of-type(3) {
+  background:
+    linear-gradient(180deg, rgba(239, 231, 255, 0.72), rgba(255, 253, 248, 0.94)),
+    var(--lavender);
+}
+
+.step-heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.step-heading span {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  border: 1px solid rgba(229, 91, 67, 0.2);
+  border-radius: 999px;
+  background: #fff1d8;
+  color: var(--primary-dark);
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.step-heading h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.field-grid {
+  display: grid;
+  gap: 12px;
 }
 
 .field {
@@ -287,7 +342,7 @@ select:focus {
 
 .result-top {
   position: relative;
-  min-height: 190px;
+  min-height: 210px;
   margin: -20px -20px 18px;
   padding: 28px 20px 22px;
   background:
@@ -305,9 +360,9 @@ select:focus {
 }
 
 .result-cat {
+  display: grid;
   width: 86px;
   height: 86px;
-  display: grid;
   place-items: center;
   margin-bottom: 8px;
   border: 2px solid rgba(255, 255, 255, 0.92);
@@ -317,21 +372,50 @@ select:focus {
   box-shadow: 0 12px 24px rgba(72, 42, 22, 0.1);
 }
 
+.fortune-date {
+  margin-bottom: 6px;
+  color: var(--secondary-dark);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
 .result-top h2 {
-  max-width: 28rem;
+  max-width: 32rem;
   margin-bottom: 8px;
   font-size: 1.65rem;
 }
 
 .result-top h2 span {
+  display: block;
   color: var(--primary-dark);
 }
 
 .cat-message {
-  max-width: 32rem;
+  max-width: 34rem;
   margin-bottom: 0;
   color: #5d493e;
   font-weight: 700;
+}
+
+.daily-fortune-panel {
+  margin-bottom: 18px;
+  border: 1px solid rgba(47, 113, 103, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(219, 240, 231, 0.88), rgba(255, 253, 248, 0.92)),
+    #f2fbf7;
+  padding: 16px;
+}
+
+.daily-fortune-panel h3 {
+  color: var(--secondary-dark);
+  font-size: 1.12rem;
+}
+
+.daily-fortune-panel p {
+  margin-bottom: 0;
+  color: #405a53;
+  font-weight: 760;
 }
 
 .score-grid {
@@ -367,7 +451,8 @@ select:focus {
 }
 
 .today-message-list,
-.lucky-list {
+.lucky-list,
+.new-song-list {
   display: grid;
   gap: 10px;
   margin: 0;
@@ -378,7 +463,8 @@ select:focus {
 }
 
 .today-message-list div,
-.lucky-list div {
+.lucky-list div,
+.new-song-list div {
   border-left: 5px solid var(--accent);
   border-radius: 8px;
   background: #fffaf3;
@@ -396,14 +482,16 @@ select:focus {
 }
 
 .today-message-list dt,
-.lucky-list dt {
+.lucky-list dt,
+.new-song-list dt {
   color: var(--muted);
   font-size: 0.78rem;
   font-weight: 900;
 }
 
 .today-message-list dd,
-.lucky-list dd {
+.lucky-list dd,
+.new-song-list dd {
   margin: 2px 0 0;
   color: var(--ink);
   font-weight: 800;
@@ -492,13 +580,44 @@ select:focus {
   margin-top: 14px;
   border: 1px dashed #efb49f;
   border-radius: 8px;
-  background: #fff8ef;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 239, 0.98), rgba(255, 253, 248, 0.96)),
+    #fff8ef;
   padding: 16px;
 }
 
 .request-panel p {
   color: var(--muted);
   font-weight: 760;
+}
+
+.new-song-list {
+  margin: 12px 0;
+}
+
+.new-song-list div:nth-child(1) {
+  border-left-color: var(--primary);
+  background: #fff4e9;
+}
+
+.new-song-list div:nth-child(2) {
+  border-left-color: var(--secondary);
+  background: #f0faf5;
+}
+
+.new-song-list div:nth-child(3) {
+  border-left-color: #8b72c9;
+  background: #f7f2ff;
+}
+
+.new-song-list div:nth-child(4) {
+  border-left-color: var(--accent);
+  background: #fff9e8;
+}
+
+.new-song-list dd#new-song-title {
+  color: var(--primary-dark);
+  font-size: 1.2rem;
 }
 
 .request-preview {
@@ -592,8 +711,18 @@ select:focus {
     padding: 34px 26px 28px;
   }
 
-  .score-grid {
+  .field-grid,
+  .score-grid,
+  .lucky-list,
+  .new-song-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .field-wide,
+  .today-message-list,
+  .new-song-list div:nth-child(1),
+  .new-song-list div:nth-child(2) {
+    grid-column: 1 / -1;
   }
 
   .song-actions,
@@ -627,13 +756,7 @@ select:focus {
     font-size: 4.5rem;
   }
 
-  .fortune-form {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .field:first-child,
-  .button-wide,
-  .form-message {
-    grid-column: 1 / -1;
+  .form-step {
+    padding: 18px;
   }
 }
