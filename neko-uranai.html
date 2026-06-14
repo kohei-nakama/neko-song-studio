@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>本質ネコタイプ診断｜今日の1曲ネコ占い</title>
+    <title>今日の1曲ネコ占い｜猫ソングスタジオ</title>
     <meta
       name="description"
-      content="気分や好きな猫ソングの世界から、本質ネコタイプ・今日のネコ運・おすすめ猫ソング・新しい猫ソング案を診断します。"
+      content="3つの質問に答えるだけ。今日のネコ運と、あなたにぴったりの猫ソングを占います。"
     />
     <link rel="stylesheet" href="assets/neko-uranai.css" />
   </head>
@@ -16,20 +16,14 @@
         <a
           class="studio-link"
           href="https://kohei-nakama.github.io/neko-song-studio/"
-          target="_blank"
-          rel="noopener"
-          aria-label="猫ソングスタジオHPを開く"
+          aria-label="猫ソングスタジオのトップページへ戻る"
         >
           猫ソングスタジオ
         </a>
-        <p class="eyebrow">Neko Fortune</p>
-        <h1 id="app-title" aria-label="本質ネコタイプ診断｜今日の1曲ネコ占い">
-          <span>本質ネコタイプ診断</span>
-          <span>今日の1曲</span>
-          <span>ネコ占い</span>
-        </h1>
+        <p class="eyebrow">Today's Neko Fortune</p>
+        <h1 id="app-title">今日の1曲<br />ネコ占い</h1>
         <p class="hero-copy">
-          気分、ほしいもの、好きな猫ソングの世界から、あなたの本質ネコタイプと今日のネコ運をこっそり診断します。
+          3つの質問に答えるだけ。今日のあなたに現れるネコと、ぴったりの猫ソングを占います。
         </p>
       </section>
 
@@ -37,188 +31,68 @@
         <div class="card-heading">
           <span class="cat-mark" aria-hidden="true">🐾</span>
           <div>
-            <p class="section-kicker">Neko Type Studio</p>
-            <h2 id="form-title">あなたのことを少し教えてください</h2>
+            <p class="section-kicker">Quick Fortune</p>
+            <h2 id="form-title">今日のネコに会いにいく</h2>
           </div>
         </div>
 
         <form id="fortune-form" class="fortune-form" novalidate>
-          <div class="form-step">
-            <div class="step-heading">
-              <span>STEP 1</span>
-              <h3>あなたのこと 🐈</h3>
-            </div>
-            <div class="field-grid">
-              <label class="field field-wide">
-                <span>ニックネーム</span>
-                <input
-                  id="nickname"
-                  name="nickname"
-                  type="text"
-                  maxlength="24"
-                  autocomplete="nickname"
-                  placeholder="例：みけ"
-                  required
-                />
-              </label>
+          <label class="field field-wide">
+            <span>ニックネーム</span>
+            <input
+              id="nickname"
+              name="nickname"
+              type="text"
+              maxlength="24"
+              autocomplete="nickname"
+              placeholder="例：みけ"
+              required
+            />
+          </label>
 
-              <label class="field">
-                <span>生まれ月</span>
-                <select id="birth-month" name="birthMonth" required>
-                  <option value="">選択してください</option>
-                  <option value="1">1月</option>
-                  <option value="2">2月</option>
-                  <option value="3">3月</option>
-                  <option value="4">4月</option>
-                  <option value="5">5月</option>
-                  <option value="6">6月</option>
-                  <option value="7">7月</option>
-                  <option value="8">8月</option>
-                  <option value="9">9月</option>
-                  <option value="10">10月</option>
-                  <option value="11">11月</option>
-                  <option value="12">12月</option>
-                </select>
-              </label>
+          <div class="field-grid">
+            <label class="field">
+              <span>生まれ月</span>
+              <select id="birth-month" name="birthMonth" required>
+                <option value="">選択してください</option>
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="11">11月</option>
+                <option value="12">12月</option>
+              </select>
+            </label>
 
-              <label class="field">
-                <span>好きな猫タイプ <small>任意</small></span>
-                <select id="favorite-cat" name="favoriteCat">
-                  <option value="">おまかせ</option>
-                  <option value="まねき猫">まねき猫</option>
-                  <option value="黒猫">黒猫</option>
-                  <option value="白猫">白猫</option>
-                  <option value="三毛猫">三毛猫</option>
-                  <option value="茶トラ">茶トラ</option>
-                  <option value="サバトラ">サバトラ</option>
-                  <option value="キジトラ">キジトラ</option>
-                  <option value="長毛猫">長毛猫</option>
-                  <option value="子猫">子猫</option>
-                  <option value="眠り猫">眠り猫</option>
-                  <option value="忍者猫">忍者猫</option>
-                  <option value="王様猫">王様猫</option>
-                  <option value="甘えんぼ猫">甘えんぼ猫</option>
-                  <option value="科学者猫">科学者猫</option>
-                  <option value="旅する猫">旅する猫</option>
-                  <option value="祭り猫">祭り猫</option>
-                  <option value="応援猫">応援猫</option>
-                </select>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-step">
-            <div class="step-heading">
-              <span>STEP 2</span>
-              <h3>今の気分 🌙</h3>
-            </div>
-            <div class="field-grid">
-              <label class="field">
-                <span>今の気分</span>
-                <select id="current-mood" name="currentMood" required>
-                  <option value="">選択してください</option>
-                  <option value="癒されたい">癒されたい</option>
-                  <option value="元気がほしい">元気がほしい</option>
-                  <option value="眠りたい">眠りたい</option>
-                  <option value="笑いたい">笑いたい</option>
-                  <option value="開運したい">開運したい</option>
-                  <option value="不思議な気分">不思議な気分</option>
-                  <option value="集中したい">集中したい</option>
-                  <option value="旅に出たい">旅に出たい</option>
-                </select>
-              </label>
-
-              <label class="field">
-                <span>今日ほしいもの</span>
-                <select id="desired-gift" name="desiredGift" required>
-                  <option value="">選択してください</option>
-                  <option value="癒し">癒し</option>
-                  <option value="勇気">勇気</option>
-                  <option value="笑い">笑い</option>
-                  <option value="開運">開運</option>
-                  <option value="集中">集中</option>
-                  <option value="ときめき">ときめき</option>
-                  <option value="安心">安心</option>
-                  <option value="冒険">冒険</option>
-                </select>
-              </label>
-
-              <label class="field">
-                <span>好きな時間帯</span>
-                <select id="favorite-time" name="favoriteTime" required>
-                  <option value="">選択してください</option>
-                  <option value="朝">朝</option>
-                  <option value="昼">昼</option>
-                  <option value="夕方">夕方</option>
-                  <option value="夜">夜</option>
-                  <option value="深夜">深夜</option>
-                </select>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-step">
-            <div class="step-heading">
-              <span>STEP 3</span>
-              <h3>好きな猫ソングの世界 🎵</h3>
-            </div>
-            <div class="field-grid">
-              <label class="field">
-                <span>好きな猫の行動</span>
-                <select id="cat-action" name="catAction" required>
-                  <option value="">選択してください</option>
-                  <option value="すやすや眠る">すやすや眠る</option>
-                  <option value="だらーんとする">だらーんとする</option>
-                  <option value="元気に走る">元気に走る</option>
-                  <option value="甘える">甘える</option>
-                  <option value="じっと見守る">じっと見守る</option>
-                  <option value="こっそり冒険する">こっそり冒険する</option>
-                  <option value="祭りで踊る">祭りで踊る</option>
-                  <option value="福を招く">福を招く</option>
-                </select>
-              </label>
-
-              <label class="field">
-                <span>好きな音楽の雰囲気</span>
-                <select id="music-mood" name="musicMood" required>
-                  <option value="">選択してください</option>
-                  <option value="やさしいポップ">やさしいポップ</option>
-                  <option value="和風">和風</option>
-                  <option value="ジャズ">ジャズ</option>
-                  <option value="ロック">ロック</option>
-                  <option value="子守唄">子守唄</option>
-                  <option value="祭り">祭り</option>
-                  <option value="ミステリアス">ミステリアス</option>
-                  <option value="かわいいダンス">かわいいダンス</option>
-                </select>
-              </label>
-
-              <label class="field">
-                <span>今の自分に近い性格</span>
-                <select id="personality" name="personality" required>
-                  <option value="">選択してください</option>
-                  <option value="マイペース">マイペース</option>
-                  <option value="甘えんぼ">甘えんぼ</option>
-                  <option value="挑戦中">挑戦中</option>
-                  <option value="考えすぎ">考えすぎ</option>
-                  <option value="自由人">自由人</option>
-                  <option value="努力家">努力家</option>
-                  <option value="直感型">直感型</option>
-                  <option value="盛り上げ役">盛り上げ役</option>
-                </select>
-              </label>
-            </div>
+            <label class="field">
+              <span>好きな猫タイプ</span>
+              <select id="favorite-cat" name="favoriteCat" required>
+                <option value="">選択してください</option>
+                <option value="ふわふわ猫">ふわふわ猫</option>
+                <option value="元気な猫">元気な猫</option>
+                <option value="甘えんぼ猫">甘えんぼ猫</option>
+                <option value="クールな猫">クールな猫</option>
+                <option value="不思議な猫">不思議な猫</option>
+                <option value="のんびり猫">のんびり猫</option>
+                <option value="まねき猫">まねき猫</option>
+                <option value="どの猫も好き">どの猫も好き</option>
+              </select>
+            </label>
           </div>
 
           <button class="button button-primary button-wide" type="submit">
-            本質ネコタイプと今日の1曲を診断する
+            今日のネコ運を占う
           </button>
           <p id="form-message" class="form-message" role="alert"></p>
         </form>
 
-        <p class="privacy-note">
-          入力内容はこの端末内の保存にのみ使われ、外部送信はされません。
-        </p>
+        <p class="privacy-note">入力内容は外部送信されません。</p>
       </section>
 
       <section
@@ -228,50 +102,44 @@
         aria-labelledby="result-title"
       >
         <div class="result-top">
-          <p class="section-kicker">Your Essence Neko</p>
-          <div class="result-cat" aria-hidden="true" id="result-emoji">🐈</div>
           <p id="fortune-date" class="fortune-date"></p>
-          <h2 id="result-title">あなたの本質ネコタイプは<span id="cat-type">まねき猫タイプ</span></h2>
+          <div class="result-cat" aria-hidden="true" id="result-emoji">🐈</div>
+          <p class="section-kicker">Today's Neko</p>
+          <h2 id="result-title">
+            <span id="result-nickname">あなた</span>さんの今日のネコは
+            <strong id="cat-type">ひなたぼっこ猫</strong>
+          </h2>
           <p id="cat-message" class="cat-message"></p>
         </div>
 
-        <div class="daily-fortune-panel" aria-labelledby="daily-fortune-title">
-          <p class="section-kicker">Today's Neko Luck</p>
-          <h3 id="daily-fortune-title">今日のネコ運</h3>
-          <p id="daily-fortune-message"></p>
+        <div class="fortune-summary" aria-labelledby="fortune-rank">
+          <div class="fortune-rank">
+            <span>今日のネコ運</span>
+            <strong id="fortune-rank">大吉ネコ</strong>
+          </div>
+          <p id="fortune-message"></p>
         </div>
 
         <div class="score-grid" aria-label="今日の運勢">
           <div class="score-item">
-            <span>総合運</span>
-            <strong id="score-total">★★★★★</strong>
+            <span>ごきげん運</span>
+            <strong id="score-mood">★★★★★</strong>
           </div>
           <div class="score-item">
-            <span>仕事運</span>
-            <strong id="score-work">★★★★★</strong>
+            <span>ひらめき運</span>
+            <strong id="score-idea">★★★★★</strong>
           </div>
           <div class="score-item">
-            <span>金運</span>
-            <strong id="score-money">★★★★★</strong>
-          </div>
-          <div class="score-item">
-            <span>恋愛/人間関係運</span>
-            <strong id="score-relationship">★★★★★</strong>
+            <span>なかよし運</span>
+            <strong id="score-friend">★★★★★</strong>
           </div>
         </div>
 
-        <dl class="today-message-list">
+        <dl class="lucky-list" aria-label="今日のラッキー要素">
           <div>
             <dt>ラッキー行動</dt>
             <dd id="lucky-action"></dd>
           </div>
-          <div>
-            <dt>今日のひとこと</dt>
-            <dd id="daily-word"></dd>
-          </div>
-        </dl>
-
-        <dl class="lucky-list" aria-label="今日のラッキー要素">
           <div>
             <dt>ラッキーカラー</dt>
             <dd id="lucky-color"></dd>
@@ -282,49 +150,27 @@
           </div>
         </dl>
 
-        <div id="song-panel" class="song-panel" aria-labelledby="song-heading">
-          <p class="section-kicker">Recommended Cat Song</p>
-          <h3 id="song-heading">既存のおすすめ猫ソング</h3>
+        <div class="song-panel" aria-labelledby="song-heading">
+          <p class="section-kicker">Today's Cat Song</p>
+          <h3 id="song-heading">今日のおすすめ猫ソング</h3>
           <p id="song-name"></p>
-          <p id="song-theme" class="song-theme"></p>
           <p id="song-description" class="song-description"></p>
-          <div id="song-available-actions" class="song-actions">
-            <a
-              id="youtube-song-link"
-              class="button button-secondary"
-              href="https://www.youtube.com/@nekosong_kouhei"
-              target="_blank"
-              rel="noopener"
-            >
-              YouTubeで聴く
-            </a>
-          </div>
-          <div id="streaming-links" class="streaming-links" aria-label="音楽配信リンク"></div>
+          <a
+            id="youtube-song-link"
+            class="button button-secondary"
+            href="https://www.youtube.com/@nekosong_kouhei"
+            target="_blank"
+            rel="noopener"
+          >
+            YouTubeで聴く
+          </a>
         </div>
 
-        <div id="request-panel" class="request-panel" aria-labelledby="request-title">
-          <p class="section-kicker">New Cat Song Idea</p>
-          <h3 id="request-title">あなたから生まれた新曲案</h3>
-          <p id="request-message"></p>
-          <dl class="new-song-list" aria-label="新しい猫ソング案">
-            <div>
-              <dt>新曲タイトル</dt>
-              <dd id="new-song-title"></dd>
-            </div>
-            <div>
-              <dt>曲のコンセプト</dt>
-              <dd id="new-song-concept"></dd>
-            </div>
-            <div>
-              <dt>曲調</dt>
-              <dd id="new-song-style"></dd>
-            </div>
-            <div>
-              <dt>サビの一言案</dt>
-              <dd id="new-song-hook"></dd>
-            </div>
-          </dl>
-          <p id="request-text-preview" class="request-preview"></p>
+        <div class="request-panel" aria-labelledby="request-title">
+          <p class="section-kicker">Cat Song Request</p>
+          <h3 id="request-title">今日の猫ソングお題</h3>
+          <p id="song-prompt" class="song-prompt"></p>
+          <p class="request-note">こんな曲も聴いてみたい、と思ったらリクエストできます。</p>
           <div class="request-actions">
             <a
               id="request-youtube-link"
@@ -333,43 +179,21 @@
               target="_blank"
               rel="noopener"
             >
-              YouTubeでコメントする
+              YouTubeでリクエスト
             </a>
-            <a
-              id="request-x-link"
-              class="button button-primary"
-              href="https://twitter.com/intent/tweet"
-              target="_blank"
-              rel="noopener"
-            >
-              Xでシェアする
-            </a>
-            <button id="copy-request-button" class="button button-soft" type="button">
-              新曲案をコピーする
-            </button>
-            <button id="request-retry-button" class="button button-soft" type="button">
-              もう一度診断する
-            </button>
+            <button id="copy-button" class="button button-soft" type="button">お題をコピー</button>
           </div>
           <p id="copy-feedback" class="copy-feedback" role="status"></p>
         </div>
 
         <div class="result-actions">
-          <button id="share-button" class="button button-primary" type="button">
+          <button id="reroll-button" class="button button-primary" type="button">
+            別の結果を見る
+          </button>
+          <button id="share-button" class="button button-secondary" type="button">
             Xで結果をシェア
           </button>
-          <button id="retry-button" class="button button-secondary" type="button">
-            もう一度診断する
-          </button>
-          <a
-            id="x-profile-link"
-            class="button button-soft"
-            href="https://x.com/nakama_kohei"
-            target="_blank"
-            rel="noopener"
-          >
-            猫ソングスタジオのXを見る
-          </a>
+          <button id="retry-button" class="button button-soft" type="button">入力を変える</button>
         </div>
       </section>
 
