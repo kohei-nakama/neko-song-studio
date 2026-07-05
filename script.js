@@ -1,27 +1,27 @@
-const header = document.querySelector("[data-header]");
+const header = document.querySelector('[data-header]');
 
 if (header) {
   const syncHeader = () => {
-    header.classList.toggle("is-scrolled", window.scrollY > 12);
+    header.classList.toggle('is-scrolled', window.scrollY > 12);
   };
 
   syncHeader();
-  window.addEventListener("scroll", syncHeader, { passive: true });
+  window.addEventListener('scroll', syncHeader, { passive: true });
 }
 
-const catGameUrl = "cat-game/index.html";
+const catGameUrl = 'cat-game/index.html';
 
 const mountCatGameLink = () => {
-  const nav = document.querySelector(".nav");
-  const navLinks = document.querySelector(".nav-links");
-  const navCta = document.querySelector(".nav-cta");
-  const heroSocial = document.querySelector(".hero-social");
+  const nav = document.querySelector('.nav');
+  const navLinks = document.querySelector('.nav-links');
+  const navCta = document.querySelector('.nav-cta');
+  const heroSocial = document.querySelector('.hero-social');
 
-  if (!nav || !navLinks || !navCta || document.querySelector("[data-cat-game-link]")) {
+  if (!nav || !navLinks || !navCta || document.querySelector('[data-cat-game-link]')) {
     return;
   }
 
-  const style = document.createElement("style");
+  const style = document.createElement('style');
   style.textContent = `
     .nav-actions {
       display: inline-flex;
@@ -79,33 +79,33 @@ const mountCatGameLink = () => {
   `;
   document.head.append(style);
 
-  const navGameTextLink = document.createElement("a");
+  const navGameTextLink = document.createElement('a');
   navGameTextLink.href = catGameUrl;
-  navGameTextLink.textContent = "ねこゲーム";
-  navGameTextLink.setAttribute("data-cat-game-link", "nav-text");
+  navGameTextLink.textContent = 'ねこゲーム';
+  navGameTextLink.setAttribute('data-cat-game-link', 'nav-text');
   navLinks.append(navGameTextLink);
 
-  const actions = document.createElement("div");
-  actions.className = "nav-actions";
+  const actions = document.createElement('div');
+  actions.className = 'nav-actions';
   navCta.replaceWith(actions);
 
-  const navGameButton = document.createElement("a");
-  navGameButton.className = "nav-game";
+  const navGameButton = document.createElement('a');
+  navGameButton.className = 'nav-game';
   navGameButton.href = catGameUrl;
-  navGameButton.textContent = "ゲームで遊ぶ";
-  navGameButton.setAttribute("data-cat-game-link", "nav-button");
+  navGameButton.textContent = 'ゲームで遊ぶ';
+  navGameButton.setAttribute('data-cat-game-link', 'nav-button');
 
   actions.append(navGameButton, navCta);
 
   if (heroSocial) {
-    const heroGameLink = document.createElement("a");
-    heroGameLink.className = "social-pill game";
+    const heroGameLink = document.createElement('a');
+    heroGameLink.className = 'social-pill game';
     heroGameLink.href = catGameUrl;
-    heroGameLink.textContent = "ねこゲームで遊ぶ";
-    heroGameLink.setAttribute("aria-label", "ねこゲームで遊ぶ");
-    heroGameLink.setAttribute("data-cat-game-link", "hero");
+    heroGameLink.textContent = 'ねこゲームで遊ぶ';
+    heroGameLink.setAttribute('aria-label', 'ねこゲームで遊ぶ');
+    heroGameLink.setAttribute('data-cat-game-link', 'hero');
 
-    const fortuneLink = heroSocial.querySelector(".fortune");
+    const fortuneLink = heroSocial.querySelector('.fortune');
     if (fortuneLink) {
       fortuneLink.after(heroGameLink);
     } else {
@@ -114,13 +114,39 @@ const mountCatGameLink = () => {
   }
 };
 
-mountCatGameLink();
+const mountCatGameNews = () => {
+  const newsList = document.querySelector('.news-list');
+  if (!newsList) return;
 
-document.querySelectorAll('a[target="_blank"][href^="http"]').forEach((link) => {
-  link.addEventListener("click", (event) => {
+  const hasAnnouncement = Array.from(newsList.querySelectorAll('h3')).some((heading) => heading.textContent.trim() === 'ねこスナックランを追加しました');
+  if (hasAnnouncement) return;
+
+  const article = document.createElement('article');
+  article.className = 'news-card news-card-featured';
+  article.setAttribute('data-cat-game-news', '');
+  article.innerHTML = `
+    <div class='news-meta'>
+      <time datetime='2026-07-05'>2026.07.05</time>
+      <span>GAME</span>
+    </div>
+    <h3>ねこスナックランを追加しました</h3>
+    <p>
+      魚を集めてスコアを伸ばすミニゲーム「ねこスナックラン」を公開しました。
+      Easy / Normal / Hard の3つのモードで遊べます。
+      <a href='cat-game/index.html'>ゲームで遊ぶ</a>
+    </p>
+  `;
+  newsList.prepend(article);
+};
+
+mountCatGameLink();
+mountCatGameNews();
+
+document.querySelectorAll('a[target=_blank][href^=http]').forEach((link) => {
+  link.addEventListener('click', (event) => {
     event.preventDefault();
 
-    const opened = window.open(link.href, "_blank", "noopener,noreferrer");
+    const opened = window.open(link.href, '_blank', 'noopener,noreferrer');
 
     if (!opened) {
       window.location.href = link.href;
