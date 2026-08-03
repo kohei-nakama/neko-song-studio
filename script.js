@@ -153,3 +153,364 @@ document.querySelectorAll('a[target=_blank][href^=http]').forEach((link) => {
     }
   });
 });
+
+const originalSongForm = document.querySelector('[data-original-song-form]');
+
+if (originalSongForm) {
+  const confirmation = document.querySelector('[data-request-confirmation]');
+  const summaryList = document.querySelector('[data-summary-list]');
+  const formStatus = document.querySelector('[data-form-status]');
+  const confirmationMessage = document.querySelector('[data-confirmation-message]');
+  const confirmationStatus = document.querySelector('[data-confirmation-status]');
+  const copySubmissionButton = document.querySelector('[data-copy-submission]');
+  const downloadSubmissionButton = document.querySelector('[data-download-submission]');
+  const editSubmissionButton = document.querySelector('[data-edit-submission]');
+  const monitorStatusTitle = document.querySelector('[data-monitor-status-title]');
+  const monitorStatusText = document.querySelector('[data-monitor-status-text]');
+  const receptionPaused = document.querySelector('[data-reception-paused]');
+  const monitorClosed = document.querySelector('[data-monitor-closed]');
+  const submissionStorageKey = 'nekoSongOriginalSongDemoSubmissions';
+  const originalSongSubmissionConfig = {
+    // TODO: 本番運用時は Googleフォーム、Formspree、Google Apps Script などのPOST先を設定する
+    endpoint: '',
+    // TODO: 本番運用時は送信先側で受付件数を管理し、この値へ反映する
+    acceptedCount: null,
+    enableLocalDemo: false,
+    monitorLimit: 3,
+  };
+  let latestSubmission = null;
+  const fieldLabels = {
+    requestId: '受付番号',
+    createdAt: '受付日時',
+    ownerName: '飼い主さんのお名前またはニックネーム',
+    email: '連絡先メールアドレス',
+    catName: '猫ちゃんのお名前',
+    age: '年齢',
+    sex: '性別',
+    breed: '猫種',
+    personality: '猫ちゃんの性格',
+    memory: '一番印象に残っている思い出',
+    favoriteFood: '好きな食べ物',
+    favoritePlace: 'お気に入りの場所',
+    messageToCat: '猫ちゃんに伝えたい言葉',
+    wordsForSong: '曲に入れたい言葉',
+    mood: '希望する曲の雰囲気',
+    plan: '希望プラン',
+    otherRequests: 'その他の希望',
+    publishPermission: '完成作品の紹介可否',
+    termsAgreement: '利用規約・注意事項への同意',
+  };
+
+  const createRequestId = () => {
+    const datePart = new Date().toISOString().slice(0, 10).replaceAll('-', '');
+    const randomPart = Math.random().toString(36).slice(2, 7).toUpperCase();
+    return `NSS-${datePart}-${randomPart}`;
+  };
+
+  const readDemoSubmissions = () => {
+    try {
+      const submissions = JSON.parse(localStorage.getItem(submissionStorageKey) || '[]');
+      return Array.isArray(submissions) ? submissions : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const getAcceptedCount = () => {
+    if (Number.isFinite(originalSongSubmissionConfig.acceptedCount)) {
+      return originalSongSubmissionConfig.acceptedCount;
+    }
+
+    return originalSongSubmissionConfig.enableLocalDemo ? readDemoSubmissions().length : 0;
+  };
+
+  const getRemainingSlots = () =>
+    Math.max(originalSongSubmissionConfig.monitorLimit - getAcceptedCount(), 0);
+
+  const isReceptionReady = () =>
+    Boolean(originalSongSubmissionConfig.endpoint) || originalSongSubmissionConfig.enableLocalDemo;
+
+  const isMonitorClosed = () => getRemainingSlots() <= 0;
+
+  const setFormDisabled = (disabled) => {
+    originalSongForm.querySelectorAll('input, textarea, select, button').forEach((field) => {
+      field.disabled = disabled;
+    });
+  };
+
+  const renderMonitorState = ({ focusPaused = false, focusClosed = false, keepConfirmation = false } = {}) => {
+    const ready = isReceptionReady();
+    const remainingSlots = getRemainingSlots();
+    const closed = remainingSlots <= 0;
+
+    if (!ready) {
+      if (monitorStatusTitle) {
+        monitorStatusTitle.textContent = '受付準備中';
+      }
+
+      if (monitorStatusText) {
+        monitorStatusText.textContent = '安全な送信先の設定が完了するまで、フォーム入力は停止しています。';
+      }
+
+      originalSongForm.hidden = true;
+      setFormDisabled(true);
+
+      if (receptionPaused) {
+        receptionPaused.hidden = false;
+      }
+
+      if (monitorClosed) {
+        monitorClosed.hidden = true;
+      }
+
+      if (confirmation) {
+        confirmation.hidden = true;
+      }
+
+      if (focusPaused && receptionPaused) {
+        receptionPaused.focus({ preventScroll: true });
+        receptionPaused.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      return;
+    }
+
+    if (receptionPaused) {
+      receptionPaused.hidden = true;
+    }
+
+    if (monitorStatusTitle) {
+      monitorStatusTitle.textContent = closed
+        ? 'モニター受付は終了しました'
+        : `残り受付枠：${remainingSlots}名`;
+    }
+
+    if (monitorStatusText) {
+      monitorStatusText.textContent = closed
+        ? `先着${originalSongSubmissionConfig.monitorLimit}名に達したため、現在は受付終了画面を表示しています。`
+        : `先着${originalSongSubmissionConfig.monitorLimit}名限定です。残り${remainingSlots}名まで受付できます。`;
+    }
+
+    originalSongForm.hidden = closed;
+    setFormDisabled(closed);
+
+    if (monitorClosed) {
+      monitorClosed.hidden = !closed;
+    }
+
+    if (closed && confirmation && !keepConfirmation) {
+      confirmation.hidden = true;
+    }
+
+    if (closed && focusClosed && monitorClosed) {
+      monitorClosed.focus({ preventScroll: true });
+      monitorClosed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const collectSubmission = () => {
+    const formData = new FormData(originalSongForm);
+    const values = Object.fromEntries(
+      Object.keys(fieldLabels).map((name) => [name, String(formData.get(name) || '').trim()])
+    );
+
+    return {
+      ...values,
+      requestId: createRequestId(),
+      createdAt: new Date().toLocaleString('ja-JP', { dateStyle: 'medium', timeStyle: 'short' }),
+      storageMode: originalSongSubmissionConfig.endpoint ? 'configured-endpoint' : 'demo-local',
+    };
+  };
+
+  const submitOriginalSongRequest = async (submission) => {
+    if (!originalSongSubmissionConfig.endpoint) {
+      return {
+        savedLocally: originalSongSubmissionConfig.enableLocalDemo
+          ? saveDemoSubmission(submission)
+          : false,
+      };
+    }
+
+    const response = await fetch(originalSongSubmissionConfig.endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(submission),
+    });
+
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+
+    const result = await response.json().catch(() => ({}));
+
+    if (Number.isFinite(result.acceptedCount)) {
+      originalSongSubmissionConfig.acceptedCount = result.acceptedCount;
+    }
+
+    if (result.closed === true) {
+      originalSongSubmissionConfig.acceptedCount = originalSongSubmissionConfig.monitorLimit;
+    }
+
+    return {
+      savedLocally: false,
+      result,
+    };
+  };
+
+  const saveDemoSubmission = (submission) => {
+    try {
+      const previous = readDemoSubmissions();
+      previous.unshift(submission);
+      localStorage.setItem(submissionStorageKey, JSON.stringify(previous.slice(0, 20)));
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const submissionToText = (submission) =>
+    Object.entries(fieldLabels)
+      .map(([name, label]) => {
+        const value = submission[name];
+        return value ? `${label}: ${value}` : '';
+      })
+      .filter(Boolean)
+      .join('\n');
+
+  const renderSubmissionSummary = (submission) => {
+    summaryList.innerHTML = '';
+
+    Object.entries(fieldLabels).forEach(([name, label]) => {
+      const value = submission[name];
+      if (!value) return;
+
+      const term = document.createElement('dt');
+      term.textContent = label;
+
+      const description = document.createElement('dd');
+      description.textContent = value;
+
+      summaryList.append(term, description);
+    });
+  };
+
+  const downloadSubmission = (submission) => {
+    const blob = new Blob([JSON.stringify(submission, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${submission.requestId}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  originalSongForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!isReceptionReady()) {
+      if (formStatus) {
+        formStatus.textContent = '現在は受付準備中です。安全な送信先の設定後に受付を開始します。';
+      }
+      renderMonitorState({ focusPaused: true });
+      return;
+    }
+
+    if (isMonitorClosed()) {
+      if (formStatus) {
+        formStatus.textContent = '先着3名のモニター受付は終了しました。';
+      }
+      renderMonitorState({ focusClosed: true });
+      return;
+    }
+
+    if (!originalSongForm.checkValidity()) {
+      if (formStatus) {
+        formStatus.textContent = '未入力の必須項目があります。表示された項目を確認してください。';
+      }
+      originalSongForm.reportValidity();
+      return;
+    }
+
+    if (!confirmation || !summaryList) {
+      return;
+    }
+
+    latestSubmission = collectSubmission();
+    let submissionResult;
+
+    try {
+      submissionResult = await submitOriginalSongRequest(latestSubmission);
+    } catch {
+      if (formStatus) {
+        formStatus.textContent = '送信できませんでした。時間をおいてもう一度お試しください。';
+      }
+      return;
+    }
+
+    const remainingSlots = getRemainingSlots();
+    const reachedLimit = remainingSlots <= 0;
+    renderSubmissionSummary(latestSubmission);
+    confirmation.hidden = false;
+
+    if (confirmationMessage) {
+      confirmationMessage.textContent = reachedLimit
+        ? `以下の内容で受付しました。これで先着${originalSongSubmissionConfig.monitorLimit}名に達したため、申込フォームは受付終了画面に切り替わりました。`
+        : originalSongSubmissionConfig.endpoint
+        ? '以下の内容で受付しました。確認後、メールでご連絡します。'
+        : '以下の内容でデモ受付しました。現在、このページから外部には送信されません。';
+    }
+
+    if (formStatus) {
+      formStatus.textContent = originalSongSubmissionConfig.endpoint
+        ? `受付番号 ${latestSubmission.requestId} を作成しました。残り受付枠は${remainingSlots}名です。`
+        : submissionResult.savedLocally
+        ? `デモ受付番号 ${latestSubmission.requestId} を作成し、このブラウザ内に保存しました。残り受付枠は${remainingSlots}名です。`
+        : `デモ受付番号 ${latestSubmission.requestId} を作成しました。ブラウザ保存は利用できませんでした。`;
+    }
+
+    renderMonitorState({ keepConfirmation: true });
+    confirmation.focus({ preventScroll: true });
+    confirmation.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  if (copySubmissionButton) {
+    copySubmissionButton.addEventListener('click', async () => {
+      if (!latestSubmission) return;
+
+      try {
+        await navigator.clipboard.writeText(submissionToText(latestSubmission));
+        if (confirmationStatus) {
+          confirmationStatus.textContent = '受付内容をコピーしました。';
+        }
+      } catch {
+        if (confirmationStatus) {
+          confirmationStatus.textContent = 'コピーできませんでした。JSON保存をお試しください。';
+        }
+      }
+    });
+  }
+
+  if (downloadSubmissionButton) {
+    downloadSubmissionButton.addEventListener('click', () => {
+      if (!latestSubmission) return;
+      downloadSubmission(latestSubmission);
+      if (confirmationStatus) {
+        confirmationStatus.textContent = '受付内容のJSONファイルを保存しました。';
+      }
+    });
+  }
+
+  if (editSubmissionButton) {
+    editSubmissionButton.addEventListener('click', () => {
+      originalSongForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const firstInput = originalSongForm.querySelector('input, textarea, select');
+      if (firstInput) {
+        firstInput.focus({ preventScroll: true });
+      }
+    });
+  }
+
+  renderMonitorState();
+}

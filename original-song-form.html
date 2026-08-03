@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>うちの子オリジナルソング申込 | 猫ソングスタジオ</title>
+    <meta
+      name="description"
+      content="猫ちゃんの性格や思い出をもとに、猫ソングスタジオがAIを制作工程の一部で活用しながら一曲ずつ制作する、うちの子オリジナルソングの申込ページです。"
+    >
+    <link rel="icon" href="assets/neko-song-logo.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="form-page">
+    <div class="paw-bg" aria-hidden="true"></div>
+
+    <header class="site-header" data-header>
+      <div class="container nav">
+        <a class="logo" href="index.html#top" aria-label="猫ソングスタジオ トップへ">
+          <img
+            class="logo-image"
+            src="assets/neko-song-logo.jpg"
+            width="72"
+            height="48"
+            alt=""
+            decoding="async"
+          >
+          <span class="logo-text">
+            猫ソングスタジオ
+            <small>Neko Song Studio</small>
+          </span>
+        </a>
+        <nav class="nav-links" aria-label="メインメニュー">
+          <a href="index.html#original-song">うちの子ソング</a>
+          <a href="index.html#news">NEWS</a>
+          <a href="index.html#about">世界観</a>
+          <a href="index.html#works">作品</a>
+          <a href="index.html#social">SNS</a>
+          <a href="neko-uranai.html">ネコ占い</a>
+        </nav>
+        <a class="nav-cta" href="index.html#original-song">紹介を見る</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="section form-hero" aria-labelledby="form-page-title">
+        <div class="container form-hero-grid">
+          <div>
+            <a class="breadcrumb-link" href="index.html#original-song">← うちの子ソング紹介へ戻る</a>
+            <p class="section-kicker">REQUEST FORM</p>
+            <h1 id="form-page-title">うちの子オリジナルソング申込</h1>
+            <p>
+              猫ちゃんの性格、思い出、希望する曲の雰囲気を送ってください。
+              すべてをきれいな文章にする必要はありません。短い言葉からでも、制作者が大切に読み取ります。
+            </p>
+          </div>
+          <aside class="form-hero-note" aria-label="受付状態">
+            <strong>モニター募集：先着3名様</strong>
+            <p>
+              現在は受付準備中です。安全な送信先の設定が完了したら、先着3名様のモニター受付を開始します。
+              3名に達すると、申込フォームは受付終了画面に切り替わります。
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section request-form-section" id="request-form" aria-labelledby="request-form-title">
+        <div class="container form-layout">
+          <div class="form-panel">
+            <p class="section-kicker">YOUR CAT, YOUR SONG</p>
+            <h2 id="request-form-title">思い出を送る</h2>
+            <p id="form-intro">
+              受付開始後は、必須項目を中心に分かる範囲で入力してください。
+              写真や動画の送付方法は、お申し込み内容の確認後にメールでご案内します。
+            </p>
+
+            <div class="monitor-status-panel" data-monitor-status aria-live="polite">
+              <strong data-monitor-status-title>受付準備中</strong>
+              <p data-monitor-status-text>安全な送信先の設定が完了するまで、フォーム入力は停止しています。</p>
+            </div>
+
+            <section class="reception-paused-panel" data-reception-paused tabindex="-1" aria-labelledby="reception-paused-title">
+              <p class="section-kicker">COMING SOON</p>
+              <h2 id="reception-paused-title">モニター受付の準備中です</h2>
+              <p>
+                個人情報を安全に受け取れる送信先を設定してから、先着3名様の受付を開始します。
+                公開中のページでは、料金や制作内容だけ確認できます。
+              </p>
+              <div class="closed-actions">
+                <a class="button button-release" href="index.html#original-song">紹介ページへ戻る</a>
+              </div>
+            </section>
+
+            <form class="original-request-form" data-original-song-form aria-describedby="form-intro form-status" novalidate hidden>
+              <!-- TODO: Googleフォーム、Formspree、Google Apps Scriptなどの本番送信先を設定する -->
+              <fieldset class="form-group">
+                <legend>飼い主さんと猫ちゃんの基本情報</legend>
+                <div class="form-grid">
+                  <label class="form-field">
+                    <span class="form-label-line">飼い主さんのお名前またはニックネーム <span class="required-label">必須</span></span>
+                    <input name="ownerName" type="text" autocomplete="name" required>
+                  </label>
+                  <label class="form-field">
+                    <span class="form-label-line">連絡先メールアドレス <span class="required-label">必須</span></span>
+                    <input name="email" type="email" autocomplete="email" required>
+                  </label>
+                  <label class="form-field">
+                    <span class="form-label-line">猫ちゃんのお名前 <span class="required-label">必須</span></span>
+                    <input name="catName" type="text" required>
+                  </label>
+                  <label class="form-field">
+                    <span class="form-label-line">年齢 <span class="optional-label">任意</span></span>
+                    <input name="age" type="text" inputmode="text" placeholder="例：5歳">
+                  </label>
+                  <label class="form-field">
+                    <span class="form-label-line">性別 <span class="optional-label">任意</span></span>
+                    <input name="sex" type="text" placeholder="例：女の子">
+                  </label>
+                  <label class="form-field">
+                    <span class="form-label-line">猫種 <span class="optional-label">任意</span></span>
+                    <input name="breed" type="text" placeholder="例：ミックス、スコティッシュフォールド">
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <legend>思い出と性格</legend>
+                <div class="form-grid">
+                  <label class="form-field form-field-wide">
+                    <span class="form-label-line">猫ちゃんの性格 <span class="required-label">必須</span></span>
+                    <textarea name="personality" rows="4" required placeholder="例：甘えんぼだけど、知らない人の前では少し慎重です。"></textarea>
+                  </label>
+                  <label class="form-field form-field-wide">
+                    <span class="form-label-line">一番印象に残っている思い出 <span class="required-label">必須</span></span>
+                    <textarea name="memory" rows="5" required placeholder="例：仕事から帰ると、いつも玄関まで走って迎えに来てくれます。"></textarea>
+                  </label>
+                  <label class="form-field">
+                    <span class="form-label-line">好きな食べ物 <span class="optional-label">任意</span></span>
+                    <input name="favoriteFood" type="text">
+                  </label>
+                  <label class="form-field">
+                    <span class="form-label-line">お気に入りの場所 <span class="optional-label">任意</span></span>
+                    <input name="favoritePlace" type="text">
+                  </label>
+                  <label class="form-field form-field-wide">
+                    <span class="form-label-line">猫ちゃんに伝えたい言葉 <span class="optional-label">任意</span></span>
+                    <textarea name="messageToCat" rows="3"></textarea>
+                  </label>
+                  <label class="form-field form-field-wide">
+                    <span class="form-label-line">曲に入れたい言葉 <span class="optional-label">任意</span></span>
+                    <textarea name="wordsForSong" rows="3"></textarea>
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <legend>希望する曲の雰囲気 <span class="required-label">必須</span></legend>
+                <div class="radio-grid">
+                  <label class="choice-card"><input type="radio" name="mood" value="明るく元気" required>明るく元気</label>
+                  <label class="choice-card"><input type="radio" name="mood" value="優しく温かい">優しく温かい</label>
+                  <label class="choice-card"><input type="radio" name="mood" value="感動的">感動的</label>
+                  <label class="choice-card"><input type="radio" name="mood" value="面白くコミカル">面白くコミカル</label>
+                  <label class="choice-card"><input type="radio" name="mood" value="かわいらしい">かわいらしい</label>
+                  <label class="choice-card"><input type="radio" name="mood" value="夜に聴きたい落ち着いた曲">夜に聴きたい落ち着いた曲</label>
+                  <label class="choice-card"><input type="radio" name="mood" value="制作者におまかせ">制作者におまかせ</label>
+                  <label class="choice-card"><input type="radio" name="mood" value="その他">その他</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <legend>希望プラン <span class="required-label">必須</span></legend>
+                <div class="radio-grid">
+                  <label class="choice-card"><input type="radio" name="plan" value="オリジナルソング制作：2,980円" required>オリジナルソング制作：2,980円</label>
+                  <label class="choice-card"><input type="radio" name="plan" value="オリジナルソング＋ショート動画：4,980円">オリジナルソング＋ショート動画：4,980円</label>
+                  <label class="choice-card"><input type="radio" name="plan" value="まずは相談したい">まずは相談したい</label>
+                </div>
+              </fieldset>
+
+              <div class="form-note-panel">
+                <strong>写真または動画についての案内</strong>
+                <p class="field-help">
+                  静的サイトではファイルアップロードを安全に受け取れないため、このページではアップロード機能を設置していません。
+                  写真や動画の送付方法は、お申し込み内容の確認後にメールでご案内します。
+                </p>
+              </div>
+
+              <div class="form-note-panel">
+                <strong>個人情報の取り扱い</strong>
+                <p class="field-help">
+                  入力いただいたお名前、メールアドレス、猫ちゃんの情報、思い出の内容は、お申し込み確認、制作連絡、作品制作のためにのみ利用します。
+                  公開許可のない個人情報や作品内容をSNS・ホームページへ掲載することはありません。
+                </p>
+              </div>
+
+              <label class="form-field">
+                <span class="form-label-line">その他の希望 <span class="optional-label">任意</span></span>
+                <textarea name="otherRequests" rows="4" placeholder="納期の希望、使いたい写真の雰囲気、相談したいことなど"></textarea>
+              </label>
+
+              <fieldset class="form-group">
+                <legend>完成作品の紹介可否 <span class="required-label">必須</span></legend>
+                <div class="radio-grid">
+                  <label class="choice-card"><input type="radio" name="publishPermission" value="一部掲載してもよい" required>一部掲載してもよい</label>
+                  <label class="choice-card"><input type="radio" name="publishPermission" value="掲載不可">掲載不可</label>
+                  <label class="choice-card"><input type="radio" name="publishPermission" value="相談して決めたい">相談して決めたい</label>
+                </div>
+              </fieldset>
+
+              <div class="agreement-panel">
+                <strong>利用規約・注意事項</strong>
+                <ul class="agreement-list">
+                  <li>完成した楽曲は個人で楽しむことを基本とします。</li>
+                  <li>商用利用を希望する場合は、申し込み前に相談してください。</li>
+                  <li>AIを制作工程の一部で使用します。</li>
+                  <li>特定の既存曲、歌手、作曲家の完全な模倣には対応しません。</li>
+                  <li>著作権を侵害する内容、第三者の権利を侵害する内容には対応しません。</li>
+                  <li>制作開始後の大幅な内容変更は、追加料金が発生する場合があります。</li>
+                  <li>納期は申し込み内容の確認後に案内します。</li>
+                </ul>
+                <label>
+                  <input name="termsAgreement" type="checkbox" value="同意済み" required>
+                  利用規約・注意事項に同意します
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button class="button button-release" type="submit">入力内容を確認する</button>
+                <a class="button button-ghost" href="index.html#original-song">紹介ページへ戻る</a>
+                <p class="form-status" id="form-status" data-form-status aria-live="polite"></p>
+              </div>
+            </form>
+
+            <section class="confirmation-panel" data-request-confirmation hidden tabindex="-1" aria-labelledby="confirmation-title">
+              <p class="section-kicker">CONFIRMATION</p>
+              <h2 id="confirmation-title">入力内容の確認</h2>
+              <p data-confirmation-message>
+                以下の内容で受付しました。
+              </p>
+              <dl class="summary-list" data-summary-list></dl>
+              <div class="confirmation-actions" aria-label="受付内容の操作">
+                <button class="button button-release" type="button" data-copy-submission>受付内容をコピー</button>
+                <button class="button button-ghost" type="button" data-download-submission>JSONで保存</button>
+                <button class="button button-ghost" type="button" data-edit-submission>入力を修正する</button>
+              </div>
+              <p class="field-help" data-confirmation-status aria-live="polite"></p>
+            </section>
+
+            <section class="closed-panel" data-monitor-closed hidden tabindex="-1" aria-labelledby="monitor-closed-title">
+              <p class="section-kicker">MONITOR CLOSED</p>
+              <h2 id="monitor-closed-title">先着3名のモニター受付は終了しました</h2>
+              <p>
+                お申し込みありがとうございます。現在のモニター枠は満席です。
+                次回募集や通常受付の準備ができ次第、このページでお知らせします。
+              </p>
+              <div class="closed-actions">
+                <a class="button button-release" href="index.html#original-song">紹介ページへ戻る</a>
+              </div>
+            </section>
+          </div>
+
+          <aside class="form-side-panel" id="consult" aria-label="申込前の補足">
+            <div>
+              <p class="section-kicker">MONITOR</p>
+              <h2>先着3名モニター料金</h2>
+              <p>サービス開始時のモニター料金です。枠が埋まり次第、受付終了画面に切り替わります。</p>
+            </div>
+            <div class="side-price">
+              <strong>オリジナルソング制作</strong>
+              <span>2,980円（税込）</span>
+            </div>
+            <div class="side-price">
+              <strong>オリジナルソング＋ショート動画</strong>
+              <span>4,980円（税込）</span>
+            </div>
+            <ul class="side-list" aria-label="フォームで送れる内容">
+              <li>短いエピソードだけでも相談できます。</li>
+              <li>曲の雰囲気は「制作者におまかせ」も選べます。</li>
+              <li>ショート動画は写真3〜6枚を使った15〜30秒の縦型動画を想定しています。</li>
+              <li>写真や動画素材は後ほどメールで送付方法をご案内します。</li>
+            </ul>
+            <div class="demo-mode-note">
+              <strong>公開前セーフモード</strong>
+              <p>
+                送信先が未設定の間はフォーム入力を停止します。
+                本番受付では送信先側で受付件数を管理し、先着3名に達したら終了画面へ切り替えます。
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">© 2026 Neko Song Studio / 猫ソングスタジオ. All rights reserved.</div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
